@@ -27,7 +27,40 @@ function main(){
     articles[i].style.backgroundColor = 'wheat';
   }
 
+  var deleteButtons = document.getElementsByClassName('delete-button');
+  for (var button in deleteButtons) {  //couldn't use for of loop here?
+    deleteButtons[button].onclick = deleteClick;
+  }
+
+
   
+}
+
+var deleteClick = function() {
+
+  // var deleteButtons = document.getElementsByClassName('delete-button');
+  // for (var button in deleteButtons) {
+  //   var section = deleteButtons[button].parentElement.parentElement;
+  //   var form = deleteButtons[button].parentElement;
+  //   section.removeChild(form);
+  // }
+  var deleteButtons = document.getElementsByClassName('delete-button');
+  for (var button in deleteButtons) {
+    
+    deleteQuote(deleteButtons[button].id);
+    console.log(deleteButtons[button].id);
+  }
+
+  
+}
+
+var deleteQuote = function(id) {
+
+  var deleteButton = document.getElementById(id);
+ 
+  var section = deleteButton.parentElement.parentElement;
+  var form = deleteButton.parentElement;
+  section.removeChild(form);
 }
 
 
@@ -79,17 +112,22 @@ var displayQuotes = function(quoteList) {
   var section = document.getElementById('quotes');
 
   for (quote of quoteList) {
-    var deleteButton = document.createElement('button');
+    var form = document.createElement('form');
+    var deleteButton = document.createElement('input');
+    deleteButton.type = 'button';
+    deleteButton.className = 'delete-button';
+    deleteButton.value = 'Destroy this quote';
     deleteButton.id = quote['words'];
     var article = document.createElement('article');
     var blockquote = document.createElement('blockquote');
     blockquote.innerText = quote['words'];
     var cite = document.createElement('cite');
     cite.innerText = quote['person'];
-    section.appendChild(article);
+    section.appendChild(form);
+    form.appendChild(article);
     article.appendChild(blockquote);
     blockquote.appendChild(cite);
-    article.appendChild(deleteButton);
+    form.appendChild(deleteButton);
 
   }
 
