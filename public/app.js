@@ -28,33 +28,25 @@ function main(){
   }
 
   var deleteButtons = document.getElementsByClassName('delete-button');
+
   for (var button in deleteButtons) {  //couldn't use for of loop here?
-    deleteButtons[button].onclick = deleteClick;
-  }
-
-
-  
+    deleteButtons[button].onclick = handleDeleteButton;
+  }  
 }
 
-var deleteClick = function() {
+function handleDeleteButton(event){
+  deleteClick(event.target.id);
+}
 
-  // var deleteButtons = document.getElementsByClassName('delete-button');
-  // for (var button in deleteButtons) {
-  //   var section = deleteButtons[button].parentElement.parentElement;
-  //   var form = deleteButtons[button].parentElement;
-  //   section.removeChild(form);
-  // }
-  var deleteButtons = document.getElementsByClassName('delete-button');
-  for (var button in deleteButtons) {
+var deleteClick = function(id) {
+
+  var deleteButtons = document.getElementById(id);
     
-    deleteQuote(deleteButtons[button].id);
-    console.log(deleteButtons[button].id);
+    handleDelete(id);
   }
 
-  
-}
 
-var deleteQuote = function(id) {
+var handleDelete = function(id) {
 
   var deleteButton = document.getElementById(id);
  
@@ -111,6 +103,8 @@ var displayQuotes = function(quoteList) {
 
   var section = document.getElementById('quotes');
 
+
+
   for (quote of quoteList) {
     var form = document.createElement('form');
     var deleteButton = document.createElement('input');
@@ -128,6 +122,7 @@ var displayQuotes = function(quoteList) {
     article.appendChild(blockquote);
     blockquote.appendChild(cite);
     form.appendChild(deleteButton);
+   
 
   }
 
